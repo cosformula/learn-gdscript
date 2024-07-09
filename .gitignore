@@ -23,3 +23,6 @@ templates/*
 
 # Local user overrides
 override.cfg
+
+
+.DS_Store

@@ -1,7 +1,7 @@
-[gd_resource type="DynamicFont" load_steps=2 format=2]
+[gd_resource type="DynamicFont" load_steps=5 format=2]
 
 [ext_resource path="res://ui/theme/fonts/SourceCodePro-Regular.otf" type="DynamicFontData" id=1]
-[ext_resource path="res://ui/theme/fonts/NotoSerifJP-Regular.otf" type="DynamicFontData" id=2]
+[ext_resource path="res://ui/theme/fonts/SourceHanSansCN-Regular.otf" type="DynamicFontData" id=2]
 [ext_resource path="res://ui/theme/fonts/NotoSerifTC-Regular.otf" type="DynamicFontData" id=3]
 [ext_resource path="res://ui/theme/fonts/NotoSerifKR-Regular.otf" type="DynamicFontData" id=4]
 

@@ -14,17 +14,16 @@ const SUPPORTED_LOCALES := [
 	"pt",
 	"pt_BR",
 	"tr",
+  "zh_Hans"
 ]
 
 var current_language := DEFAULT_LOCALE setget set_language
 
 var _loaded_translations := []
 
-
 func _ready() -> void:
 	var current_profile := UserProfiles.get_profile()
 	set_language(current_profile.language)
-
 
 func get_available_languages() -> Array:
 	var languages := []
@@ -36,7 +35,6 @@ func get_available_languages() -> Array:
 		})
 	
 	return languages
-
 
 func set_language(language_code: String) -> void:
 	if current_language == language_code:
@@ -65,19 +63,19 @@ func set_language(language_code: String) -> void:
 	
 	var fs := Directory.new()
 	if not fs.dir_exists(locale_dir_path):
-		printerr("Failed to change language to '%s': Language folder does not exist." % [ current_language ])
+		printerr("Failed to change language to '%s': Language folder does not exist." % [current_language])
 		_reset_language()
 		return
 	
 	var error = fs.change_dir(locale_dir_path)
 	if error:
-		printerr("Failed to open language folder for '%s': Error code %d" % [ current_language, error ])
+		printerr("Failed to open language folder for '%s': Error code %d" % [current_language, error])
 		_reset_language()
 		return
 	
 	error = fs.list_dir_begin(true, true)
 	if error:
-		printerr("Failed to list language folder for '%s': Error code %d" % [ current_language, error ])
+		printerr("Failed to list language folder for '%s': Error code %d" % [current_language, error])
 		_reset_language()
 		return
 	
@@ -91,13 +89,13 @@ func set_language(language_code: String) -> void:
 		var full_path = locale_dir_path.plus_file(file_path)
 		
 		if not ResourceLoader.exists(full_path):
-			printerr("Language file at '%s' is not recognized as a valid resource." % [ full_path ])
+			printerr("Language file at '%s' is not recognized as a valid resource." % [full_path])
 			file_path = fs.get_next()
 			continue
 		
 		var translation := ResourceLoader.load(full_path, "Translation") as Translation
 		if not translation:
-			printerr("Language resource at '%s' has failed to load." % [ full_path ])
+			printerr("Language resource at '%s' has failed to load." % [full_path])
 			file_path = fs.get_next()
 			continue
 		
@@ -113,7 +111,6 @@ func set_language(language_code: String) -> void:
 	current_profile.language = current_language
 	current_profile.save()
 	emit_signal("translation_changed")
-
 
 func _reset_language() -> void:
 	current_language = DEFAULT_LOCALE
